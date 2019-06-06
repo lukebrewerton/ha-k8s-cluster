@@ -3,6 +3,8 @@
 # Setup IAM on nodes
 aws iam put-role-policy --role-name nodes.k8s.aws.lb-dev.io --policy-name kube2iam-assume --policy-document file://cluster-bootstrap/files/iam-roles/node-iam-trust.json
 
+sleep 1m
+
 # Setup IAM roles for ALB ingress and external-dns to assume
 aws iam create-role --role-name k8s-alb-ingress --assume-role-policy-document file://cluster-bootstrap/files/iam-roles/role-iam-trust.json
 aws iam create-role --role-name k8s-external-dns --assume-role-policy-document file://cluster-bootstrap/files/iam-roles/role-iam-trust.json
@@ -29,7 +31,7 @@ kubectl apply -f ./cluster-bootstrap/files/config/storage.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml --namespace=kube-system
 
 # Setup Helm
-helm init --tiller-tls --tiller-tls-cert cluster-bootstrap/files/certificates/tiller.cert.pem --tiller-tls-key cluster-bootstrap/files/certificates/tiller.key.pem --tiller-tls-verify --tls-ca-cert cluster-bootstrap/files/certificates/ca.cert.pem --service-account=tiller
+helm init --tiller-tls --tiller-tls-cert cluster-bootstrap/files/certs/tiller.cert.pem --tiller-tls-key cluster-bootstrap/files/certs/tiller.key.pem --tiller-tls-verify --tls-ca-cert cluster-bootstrap/files/certs/ca.cert.pem --service-account=tiller
 helm repo add akomljen-charts https://raw.githubusercontent.com/komljen/helm-charts/master/charts/
 
 # Wait for Tiller to initialise
