@@ -1,0 +1,16 @@
+# Generate the certificates required by helm
+
+openssl genrsa -out ../files/certs/ca.key.pem 4096
+openssl req -key certs/ca.key.pem -new -x509 -days 7300 -sha256 -out ../files/certs/ca.cert.pem -extensions v3_ca
+openssl genrsa -out ../files/certs/tiller.key.pem 4096
+openssl genrsa -out ../files/certs/helm.key.pem 4096
+openssl req -key certs/tiller.key.pem -new -sha256 -out ../files/certs/tiller.csr.pem
+openssl req -key certs/helm.key.pem -new -sha256 -out ../files/certs/helm.csr.pem
+openssl x509 -req -CA ../files/certs/ca.cert.pem -CAkey ../files/certs/ca.key.pem -CAcreateserial -in ../files/certs/tiller.csr.pem -out ../files/certs/tiller.cert.pem -days 365
+openssl x509 -req -CA ../files/certs/ca.cert.pem -CAkey ../files/certs/ca.key.pem -CAcreateserial -in ../files/certs/helm.csr.pem -out ../files/certs/helm.cert.pem  -days 365
+
+# Copy the certificates to helm home
+
+cp ../files/certs/ca.cert.pem $(helm home)/ca.pem
+cp ../files/certs/helm.cert.pem $(helm home)/cert.pem
+cp ../files/certs/helm.key.pem $(helm home)/key.pem

@@ -1,0 +1,9 @@
+cluster-bootstrap/files/certs/tiller.key.pem
+cluster-bootstrap/files/certs/ca.cert.pem
+cluster-bootstrap/files/certs/ca.key.pem
+cluster-bootstrap/files/certs/ca.srl
+cluster-bootstrap/files/certs/helm.cert.pem
+cluster-bootstrap/files/certs/helm.csr.pem
+cluster-bootstrap/files/certs/helm.key.pem
+cluster-bootstrap/files/certs/tiller.cert.pem
+cluster-bootstrap/files/certs/tiller.csr.pem

@@ -1,0 +1,3 @@
+podAnnotations: {
+  iam.amazonaws.com/role: k8s-alb-ingress
+}
