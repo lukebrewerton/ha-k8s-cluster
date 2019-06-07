@@ -12,7 +12,7 @@ kops create cluster \
     --networking weave \
     --cloud-labels "Team=Dev,Owner=Luke" \
     --admin-access=109.231.226.125/32 \
-    --admin-access=178.128.162.175/32
+    --admin-access=178.128.162.175/32 \
     --bastion \
     ${NAME} \
     --yes
