@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# Set environment Variables
+source cluster-bootstrap/files/config/env.sh
+
 # Create the cluster
 
 kops create cluster \

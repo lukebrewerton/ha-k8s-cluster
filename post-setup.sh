@@ -16,6 +16,9 @@ aws iam put-role-policy --role-name k8s-external-dns --policy-name external-dns 
 # Setup ServiceAccount to access the Dashboard
 kubectl create -f cluster-bootstrap/files/config/luke-sa.yaml
 
+# Add Service Account for GitLab
+kubectl create -f cluster-bootstrap/files/config/gitlab-sa.yaml
+
 # Setup RBAC for Tiller
 kubectl create -f cluster-bootstrap/files/config/tiller-rbac.yaml
 
@@ -50,3 +53,6 @@ helm install --name=alb --namespace ingress --set-string autoDiscoverAwsRegion=t
 
 # Setup External-DNS
 kubectl apply -f cluster-bootstrap/files/config/external-dns.yaml 
+
+# Export GitLab Variables
+./cluster-bootstrap/scripts/gitlab-vars.sh > gitlab-vars.txt
